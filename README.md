@@ -2,7 +2,16 @@
 
 [English](#english) | [中文](#中文)
 
-![An xTool X1 engraving a relief with the blue laser](docs/x1-blue-laser-relief.gif)
+<table>
+  <tr>
+    <td><img src="docs/x1-blue-laser-relief.gif" width="360" alt="An xTool X1 engraving a relief with the blue laser"></td>
+    <td><img src="docs/x1-uv-laser-relief.gif" width="360" alt="An xTool X1 engraving the same relief with the UV laser"></td>
+  </tr>
+  <tr>
+    <td>Blue laser 20 W, 4 cleaning (feather) passes: near the end they wiped out the detail.<br>蓝光 20 W，羽化 4 遍：收尾那 4 遍清扫把细节都扫没了。</td>
+    <td>UV laser 5 W, no cleaning passes: much finer, and the detail stays.<br>紫光 UV 5 W，不加清扫：细腻得多，细节都留着。</td>
+  </tr>
+</table>
 
 ---
 
