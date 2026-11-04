@@ -292,6 +292,10 @@ Not verified:
 - Debugging, concept and the redesign of the framework: Eddy. Implementation: Claude.
 - In Eddy's own use the fix works well. If you do not need it, leave it off: every switch is optional.
 
+### License
+
+Apache License 2.0, see [LICENSE](LICENSE). Copyright 2026 eddy.
+
 ---
 
 ## 中文
@@ -529,3 +533,7 @@ transparent_as_color=1  # 1 = 透明像素按图里的颜色，0 = 照 Studio（
 - 测试：全程由 Eddy 测试。
 - 调试、构思、改造框架：Eddy；执行实现：Claude。
 - 修复效果 Eddy 个人感觉良好；不需要的话就不开，每个开关都是可选的。
+
+### 许可证
+
+Apache License 2.0，全文见 [LICENSE](LICENSE)。Copyright 2026 eddy。
