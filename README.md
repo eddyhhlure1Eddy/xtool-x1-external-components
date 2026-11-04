@@ -18,10 +18,7 @@ that you have to ask for: keeping fewer than the slicer's 8 feather passes (see 
 
 - Unofficial. This project is not made, endorsed or supported by xTool. xTool, xTool Studio and X1 are named only
   to say what it works with; the names belong to their owners.
-- It changes what Studio sends to the machine: the slicer's input before slicing (keep top, transparent
-  background), and the G-code after slicing when you keep fewer than 8 feather passes. A laser can start a fire and
-  injure eyes and skin. Run its output only as you would run Studio's own: attended, with the enclosure closed and
-  the fume extraction on, and check each job (Studio's preview, the estimator's figures) before you start it.
+- Operate the machine following xTool's official manual.
 - With both boxes clear and 8 feather passes the wrapper changes nothing: each call goes straight to the vendor
   plugin. Uninstalling puts the vendor file back.
 - Tested only with xTool Studio 1.10.2 beta and one X1 (see Tested, and not verified). The installer refuses other
@@ -309,9 +306,7 @@ Apache License 2.0, see [LICENSE](LICENSE). Copyright 2026 eddy.
 
 - 非官方项目。不是 xTool 出的，xTool 没有认可，也不提供支持。文中提到 xTool、xTool Studio、X1，只是说明它配合什么用，
   名称归各自所有者。
-- 它会改 Studio 发给机器的内容：切片前改生成器的输入（保留顶部、透明背景），羽化遍数少于 8 遍时还会在切片后改 G 代码。
-  激光会引起火灾，会伤眼睛和皮肤。它的输出只能像 Studio 自己的输出一样用：有人看着、机盖关好、排烟开着；每一单开刻前
-  都先核对（Studio 的预览、估算窗口的数值）。
+- 操作机器遵循 xTool 官方手册即可。
 - 两个勾都不勾、羽化 8 遍时，包装层什么都不改，每次调用直接交给厂家插件。卸载会把厂家的原文件放回去。
 - 只在 xTool Studio 1.10.2 测试版和一台 X1 上测过（见「测过的和没核实的」）。别的版本，安装脚本会拒绝。
 - 估算窗口里的深度、时间、层号都是推算的，不是机器报上来的读数。
