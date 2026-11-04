@@ -8,6 +8,49 @@
 
 ## English
 
+### Highlights: what it fixes and what it adds
+
+More control over the relief mode of xTool Studio 1.10.2 beta on the X1. Every change is a switch; with both boxes
+clear and 8 feather passes, Studio works exactly as shipped.
+
+**Fixed**
+
+1. **Cleaning (feather) passes can be turned off.** Whenever the picture spans more than one galvo block, Studio adds
+   8 cleaning passes after the last layer, even with Cleanup off. Their power (98 %), speed, frequency and pulse
+   width are fixed: the panel's feather power and speed only switch them on or off, and the count is always 8. A
+   fixed-power sweep over the whole area flattens the relief that was just engraved, the most common complaint on
+   the xTool forum. Here you choose 0–8 passes: 0 = none, 8 = as shipped.
+2. **The top surface is not planed off.** The vendor slicer burns every pixel that is not pure white in layer 0 and
+   almost the whole picture in the next layers (a photo at 64 layers: 99.99 % of the area in layer 0, over 91 % in
+   each of layers 1–10), so the original surface is cut away. Keep top skips those layers: the brightest part (by
+   default the brightest 5 % of the engraved area) stays at the original surface and the rest is cut from there
+   down.
+3. **Transparent backgrounds are no longer inverted.** Studio turns transparent pixels white before slicing, so a
+   depth map with a transparent background leaves the background at the surface and cuts the subject down. With the
+   switch on, the slicer gets the colour stored in those pixels.
+4. **No lost focus lines.** For some layer counts the slicer leaves a layer without its focus (V) line, and every
+   later layer ends one step too shallow. With keep top on, the number of skipped layers is chosen so that no V line
+   is lost (or the fewest).
+
+**Added**
+
+- **Depth before you engrave**: expected deepest point, depth map, per-layer area and laser-on time, energy per
+  layer.
+- **Live layer view**: the layer (or feather pass) the machine is on, that layer's area on the picture, and the time
+  left. Each layer's share of the time comes from Studio's own estimator, run layer by layer.
+- **Presets**: save a good job with its material, board thickness, measured depth and a photo. From a few measured
+  jobs of one material it estimates how deep the current job goes, or the layers or speed a target depth needs.
+- **Changes apply at the next Process click**, without restarting Studio; uninstalling puts the vendor file back.
+- **The window** belongs to Studio, collapses to one line and switches between English and Chinese.
+- **G-code check scripts** that compare two G-code files: commands and values, focus positions, laser area, the
+  camera block and the end sequence.
+- **10 issues in Studio 1.10.2 beta**, listed under Issues found below. All but the ones marked untested were
+  reproduced with the vendor's own slicer.
+
+We hope xTool builds these controls into Studio itself, so that users no longer have to add them by hand.
+
+### What it is
+
 A small wrapper DLL for the relief (3D) mode of xTool Studio on the xTool X1 (JS001). It sits in front of the
 vendor path-planning plugin `lib_path_planning.dll`. Right before the vendor slicer runs, it prepares the slicer's
 inputs (the grayscale image and `sliceNumber` in `manifest.json`). The vendor slicer then generates the G-code
@@ -296,6 +339,40 @@ Apache License 2.0, see [LICENSE](LICENSE). Copyright 2026 eddy.
 ---
 
 ## 中文
+
+### 亮点：修了什么、加了什么
+
+给 X1 上 xTool Studio 1.10.2 测试版的浮雕模式多加了几项控制。每一项都是开关；两个勾都不勾、羽化 8 遍时，Studio 跟原来
+完全一样。
+
+**修复**
+
+1. **清扫（羽化）遍可以关掉。** 只要图跨过不止一个振镜块，Studio 就在最后一层后面加 8 遍清扫，「清理」开关关着也照加。
+   这 8 遍的功率（98 %）、速度、频率、脉宽都是写死的：面板上的羽化功率、羽化速度只起开关作用，遍数也总是 8。功率恒定、
+   整片扫过去，刚刻好的浮雕就被抹平，这是 xTool 论坛里抱怨最多的问题。这里可以设 0–8 遍：0 = 一遍不加，8 = 厂家原样。
+2. **不刨顶面。** 厂家生成器第 0 层刻所有不是纯白的像素，后面几层又几乎整张再刻一遍（一张照片按 64 层，第 0 层刻了
+   99.99 % 的面积，第 1–10 层每层都超过 91 %），原表面整片被刨掉。「保留顶部」跳过这几层：最亮的部分（默认是要刻的面积里
+   最亮的 5 %）留在原表面，其余从原表面往下刻。
+3. **透明背景不再刻反。** Studio 切层前把透明像素变成白色，背景透明的深度图就成了背景留在表面、主体往下刻。打开开关后，
+   生成器拿到的是透明像素里存的颜色。
+4. **焦点行不丢。** 生成器在某些层数下会漏写某一层的焦点（V）行，之后每一层都浅一步。打开「保留顶部」时，跳过的层数会选成
+   不丢焦点行的值（避不开就丢得最少）。
+
+**新增**
+
+- **开刻前看深度**：预计最深、深度图、逐层面积和出光时间、每层能量。
+- **实时看刻到第几层**：机器正在刻第几层（或羽化第几遍）、这一层在图上刻哪些地方、还要多久。每层占多少时间，用 Studio
+  自己的估算逐层算。
+- **参数库**：刻得好的一单，连同材料、板厚、实测深度和照片一起存下来。同一种材料积累几条实测以后，能推算这一单会刻多深，
+  或者刻到目标深度要多少层、多快的速度。
+- **改了下一次点「加工」就生效**，不用重启 Studio；卸载会把厂家原文件放回去。
+- **估算窗口**挂在 Studio 上，能收起成一行，能切换中英文。
+- **G 代码核对脚本**：对比两份 G 代码的指令和数值、焦点位置、出光范围、拍照块和结尾。
+- **Studio 1.10.2 测试版的 10 个问题**：写在下面「发现的问题」里，除了标「未实测」的，都用厂家自己的生成器复现过。
+
+希望 xTool 看到以后，把这些控制直接做进官方软件，不用用户再自己费时费力地去改。
+
+### 这是什么
 
 给 xTool X1（JS001）在 xTool Studio 里的浮雕（3D）模式用的一层包装 DLL，放在厂家路径规划插件
 `lib_path_planning.dll` 前面。厂家生成器动手之前，它先把生成器要读的输入准备好：灰度图，以及 `manifest.json`
